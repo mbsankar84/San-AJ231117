@@ -1,0 +1,224 @@
+CREATE TABLE [dbo].[AJ_Anaesthesiarelatedmortality] (
+    [Id]               INT            IDENTITY (1, 1) NOT NULL,
+    [IPNumber]         NVARCHAR (MAX) NULL,
+    [HospitalNumber]   NVARCHAR (MAX) NULL,
+    [PatientName]      NVARCHAR (MAX) NULL,
+    [Age]              INT            NULL,
+    [Sex]              NVARCHAR (MAX) NULL,
+    [Department]       NVARCHAR (MAX) NULL,
+    [strOther]         NVARCHAR (MAX) NULL,
+    [asa_score]        NVARCHAR (MAX) NULL,
+    [Other]            NVARCHAR (MAX) NULL,
+    [dt_surgery]       DATETIME2       NULL,
+    [Anaesthesia_plan] NVARCHAR (MAX) NULL,
+    [reason]           NVARCHAR (MAX) NULL,
+    [dt_submitted]     DATETIME2       NULL,
+    [submitted_by]     NVARCHAR (MAX) NULL,
+    [diagnosis] NVARCHAR(MAX) NULL, 
+    [diagnosis_split] NVARCHAR(MAX) NULL, 
+    [planned_surgical_procedure] NVARCHAR(MAX) NULL, 
+    [planned_surgical_procedure_split] NVARCHAR(MAX) NULL, 
+    [surgery_location] NVARCHAR(MAX) NULL, 
+    [Anaesthesiologist] NVARCHAR(MAX) NULL, 
+    CONSTRAINT [PK_dbo.Anaesthesiarelatedmortality] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+
+
+
+CREATE TABLE [dbo].[AdverseAnaesthesiaEvents] (
+    [Id]                               INT            IDENTITY (1, 1) NOT NULL,
+    [IPNumber]                         NVARCHAR (MAX) NULL,
+    [HospitalNumber]                   NVARCHAR (MAX) NULL,
+    [PatientName]                      NVARCHAR (MAX) NULL,
+    [Age]                              INT            NULL,
+    [Sex]                              NVARCHAR (MAX) NULL,
+    [Department]                       NVARCHAR (MAX) NULL,
+    [strOther]                         NVARCHAR (MAX) NULL,
+    [asa_score]                        NVARCHAR (MAX) NULL,
+    [Other]                            NVARCHAR (MAX) NULL,
+    [dt_surgery]                       DATETIME2 (7)  NULL,
+    [Anaesthesia_plan]                 NVARCHAR (MAX) NULL,
+    [reason]                           NVARCHAR (MAX) NULL,
+    [treatment_given]                  NVARCHAR (MAX) NULL,
+    [surgery_success]                  NVARCHAR (MAX) NULL,
+    [patient_outcome]                  NVARCHAR (MAX) NULL,
+    [dt_submitted]                     DATETIME2 (7)  NULL,
+    [submitted_by]                     NVARCHAR (MAX) NULL,
+    [diagnosis]                        NVARCHAR (MAX) NULL,
+    [diagnosis_split]                  NVARCHAR (MAX) NULL,
+    [planned_surgical_procedure]       NVARCHAR (MAX) NULL,
+    [planned_surgical_procedure_split] NVARCHAR (MAX) NULL,
+    [surgery_location]                 NVARCHAR (MAX) NULL,
+    [Anaesthesiologist]                NVARCHAR (MAX) NULL,
+    CONSTRAINT [PK_dbo.AdverseAnaesthesiaEvents] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+
+
+
+==============================================================================================
+
+
+CREATE PROCEDURE [dbo].[sp_NewRecordInsertion_AdverseAnaesthesia]
+	@IPNumber nvarchar(max) NULL ,
+	@HospitalNumber nvarchar(max) NULL ,
+	@PatientName nvarchar(max) NULL ,
+	@Age int NULL,
+	@Sex nvarchar(max) NULL ,
+	@Department nvarchar(max) NULL ,
+	@strOther nvarchar(max) NULL ,
+	@asa nvarchar(max) NULL ,
+	@other nvarchar(max) NULL ,
+	@dt_surgery Datetime2 NULL,
+	@Anaesthesia_plan nvarchar(max) null,
+	@reason nvarchar(max) null,
+	@treatment_given nvarchar(max) null,
+	@surgery_success nvarchar(max) null,
+	@patient_outcome nvarchar(max) null,
+	@dt_submitted datetime2 null,
+	@submitted_by nvarchar(max) null,
+	@diagnosis nvarchar(max) null,
+	@diagnosis_split nvarchar(max) null,
+	@planned_surgical_procedure nvarchar(max) null,
+	@planned_surgical_procedure_split nvarchar(max) null,
+	@surgery_location nvarchar(max) null,
+	@anaesthesiologist nvarchar(max) null
+
+AS
+	BEGIN
+	INSERT INTO AdverseAnaesthesiaEvents(
+[IPNumber]  ,
+    [HospitalNumber],
+    [PatientName],
+    [Age],
+    [Sex],
+    [Department],
+    [strOther],
+    [asa_score],
+    [Other],
+    [dt_surgery],
+    [Anaesthesia_plan],
+    [reason],
+    [treatment_given],
+    [surgery_success],
+    [patient_outcome],
+    [dt_submitted],
+    [submitted_by],
+    [diagnosis], 
+    [diagnosis_split], 
+    [planned_surgical_procedure], 
+    [planned_surgical_procedure_split], 
+    [surgery_location] , 
+    [Anaesthesiologist] 
+    
+)
+VALUES
+(
+
+@IPNumber,
+	@HospitalNumber,
+	@PatientName,
+	@Age,
+	@Sex,
+	@Department,
+	@strOther,
+	@asa,
+	@other ,
+	@dt_surgery,
+	@Anaesthesia_plan,
+	@reason,
+	@treatment_given,
+	@surgery_success,
+	@patient_outcome,
+	@dt_submitted ,
+	@submitted_by ,
+	@diagnosis,
+	@diagnosis_split ,
+	@planned_surgical_procedure,
+	@planned_surgical_procedure_split,
+	@surgery_location,
+	@anaesthesiologist
+)
+
+END
+
+
+
+
+
+CREATE PROCEDURE [dbo].[sp_NewRecordInsertion_Anaesthesiarelatedmortality]
+	@IPNumber nvarchar(max) NULL ,
+	@HospitalNumber nvarchar(max) NULL ,
+	@PatientName nvarchar(max) NULL ,
+	@Age int NULL,
+	@Sex nvarchar(max) NULL ,
+	@Department nvarchar(max) NULL ,
+	@strOther nvarchar(max) NULL ,
+	@asa nvarchar(max) NULL ,
+	@other nvarchar(max) NULL ,
+	@dt_surgery Datetime2 NULL,
+	@Anaesthesia_plan nvarchar(max) null,
+	@reason nvarchar(max) null,
+	@dt_submitted datetime2 null,
+	@submitted_by nvarchar(max) null,
+	@diagnosis nvarchar(max) null,
+	@diagnosis_split nvarchar(max) null,
+	@planned_surgical_procedure nvarchar(max) null,
+	@planned_surgical_procedure_split nvarchar(max) null,
+	@surgery_location nvarchar(max) null,
+	@anaesthesiologist nvarchar(max) null
+
+AS
+	BEGIN
+	INSERT INTO AJ_Anaesthesiarelatedmortality(
+[IPNumber]  ,
+    [HospitalNumber],
+    [PatientName],
+    [Age],
+    [Sex],
+    [Department],
+    [strOther],
+    [asa_score],
+    [Other],
+    [dt_surgery],
+    [Anaesthesia_plan],
+    [reason],
+    [dt_submitted],
+    [submitted_by],
+    [diagnosis], 
+    [diagnosis_split], 
+    [planned_surgical_procedure], 
+    [planned_surgical_procedure_split], 
+    [surgery_location] , 
+    [Anaesthesiologist] 
+    
+)
+VALUES
+(
+
+@IPNumber,
+	@HospitalNumber,
+	@PatientName,
+	@Age,
+	@Sex,
+	@Department,
+	@strOther,
+	@asa,
+	@other ,
+	@dt_surgery,
+	@Anaesthesia_plan,
+	@reason,
+	@dt_submitted ,
+	@submitted_by ,
+	@diagnosis,
+	@diagnosis_split ,
+	@planned_surgical_procedure,
+	@planned_surgical_procedure_split,
+	@surgery_location,
+	@anaesthesiologist
+)
+
+END
